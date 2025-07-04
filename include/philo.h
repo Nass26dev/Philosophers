@@ -6,7 +6,7 @@
 /*   By: nyousfi <nyousfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:14:52 by nyousfi           #+#    #+#             */
-/*   Updated: 2025/07/03 18:48:36 by nyousfi          ###   ########.fr       */
+/*   Updated: 2025/07/04 16:07:29 by nyousfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ typedef struct s_philo
 	long			start_time;
 	long 			nb_philos;
 	bool 			is_dead;
-	bool 			l_fork;
-	bool 			r_fork;
+	bool 			*l_fork;
+	bool 			*r_fork;
 	T_MUTEX	        left_fork;
 	T_MUTEX	        right_fork;
 	T_MUTEX	        print_mutex;
@@ -75,6 +75,7 @@ typedef struct s_data
 	T_MUTEX meal_mutex;
 	T_MUTEX time_mutex;
 	T_MUTEX philo_mutex;
+	bool bool_forks[MAX_PHILOS];
 	int 		nb_philos;
 }			t_data;
 

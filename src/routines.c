@@ -6,7 +6,7 @@
 /*   By: nyousfi <nyousfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:56:02 by nyousfi           #+#    #+#             */
-/*   Updated: 2025/07/03 18:51:45 by nyousfi          ###   ########.fr       */
+/*   Updated: 2025/07/04 16:15:26 by nyousfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,23 @@ void *monitor_routine(void *arg)
 		{
 			pthread_mutex_unlock(&philos->philo_mutex);
 			pthread_mutex_lock(&philos->meal_mutex);
-			if (get_current_time_ms() - philos[i].last_meal >= philos[i].times.die)
+			pthread_mutex_lock(&philos[i].time_mutex);
+			if ((get_current_time_ms() - philos[i].last_meal) >= philos[i].times.die)
 			{
-				stop_routine(philos);
-				pthread_mutex_unlock(&philos->meal_mutex);
 				pthread_mutex_lock(&philos->print_mutex);
+				stop_routine(philos);
+				pthread_mutex_unlock(&philos[i].time_mutex);
+				pthread_mutex_unlock(&philos->meal_mutex);
 				printf("%s%ld%s %d %s%s%s\n", PURPLE, get_current_time_ms()
 					- philos[i].start_time, RESET, philos[i].id, RED, "is dead", RESET);
 				pthread_mutex_unlock(&philos->print_mutex);
 				return (NULL);
 			}
+			pthread_mutex_unlock(&philos[i].time_mutex);
 			pthread_mutex_unlock(&philos->meal_mutex);
 			pthread_mutex_lock(&philos->philo_mutex);
 		}
+		pthread_mutex_unlock(&philos[0].philo_mutex);
 		if (all_meals_reached(philos))
 		{
 			stop_routine(philos);

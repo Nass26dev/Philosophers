@@ -6,7 +6,7 @@
 /*   By: nyousfi <nyousfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 17:27:38 by nyousfi           #+#    #+#             */
-/*   Updated: 2025/07/03 17:41:27 by nyousfi          ###   ########.fr       */
+/*   Updated: 2025/07/04 16:08:33 by nyousfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ void try_to_take_left_fork(t_philo *philo)
 	while (1)
 	{
 		pthread_mutex_lock(&philo->left_fork);
-		if (!philo->l_fork)
+		if (!*(philo->l_fork))
 		{
-			philo->l_fork = true;
+			*(philo->l_fork) = true;
 			pthread_mutex_unlock(&philo->left_fork);
 			print_step(philo, YELLOW, "has taken a fork");
 			return ;
@@ -58,9 +58,9 @@ void try_to_take_right_fork(t_philo *philo)
 	while (1)
 	{
 		pthread_mutex_lock(&philo->right_fork);
-		if (!philo->r_fork)
+		if (!*(philo->r_fork))
 		{
-			philo->r_fork = true;
+			*(philo->r_fork) = true;
 			pthread_mutex_unlock(&philo->right_fork);
 			print_step(philo, ORANGE, "has taken a fork");
 			return ;
@@ -73,9 +73,9 @@ void try_to_take_right_fork(t_philo *philo)
 void drop_forks(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->left_fork);
-	philo->l_fork = false;
+	*(philo->l_fork) = false;
 	pthread_mutex_unlock(&philo->left_fork);
 	pthread_mutex_lock(&philo->right_fork);
-	philo->r_fork = false;
+	*(philo->r_fork) = false;
 	pthread_mutex_unlock(&philo->right_fork);
 }

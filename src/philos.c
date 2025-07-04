@@ -6,7 +6,7 @@
 /*   By: nyousfi <nyousfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:39:28 by nyousfi           #+#    #+#             */
-/*   Updated: 2025/07/03 17:39:44 by nyousfi          ###   ########.fr       */
+/*   Updated: 2025/07/04 16:09:15 by nyousfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,10 @@ void create_philos(t_data *data, int argc, char **argv)
 		data->philo[i].meal_mutex = data->meal_mutex;
 		data->philo[i].time_mutex = data->time_mutex;
 		data->philo[i].philo_mutex = data->philo_mutex;
-		data->philo[i].l_fork = false;
-		data->philo[i].r_fork = false;
+		data->philo[i].l_fork = &data->bool_forks[i];
+		data->philo[i].r_fork = &data->bool_forks[(i + 1) % data->nb_philos];
+		*(data->philo[i].l_fork) = false;
+		*(data->philo[i].r_fork) = false;
 		i++;
 	}
 	

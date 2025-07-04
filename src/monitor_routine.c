@@ -6,7 +6,7 @@
 /*   By: nyousfi <nyousfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 18:05:51 by nyousfi           #+#    #+#             */
-/*   Updated: 2025/07/03 18:10:10 by nyousfi          ###   ########.fr       */
+/*   Updated: 2025/07/04 16:19:21 by nyousfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,5 @@ void stop_routine(t_philo *philos)
 		i++;
 		pthread_mutex_lock(&philos[0].philo_mutex);
 	}
+	pthread_mutex_unlock(&philos[0].philo_mutex);
 }
