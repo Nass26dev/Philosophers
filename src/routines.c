@@ -6,7 +6,7 @@
 /*   By: nyousfi <nyousfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:56:02 by nyousfi           #+#    #+#             */
-/*   Updated: 2025/07/17 09:50:36 by nyousfi          ###   ########.fr       */
+/*   Updated: 2025/07/17 09:54:42 by nyousfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	*monitor_routine(void *arg)
 			pthread_mutex_unlock(philos[0].philo_mutex);
 			if (check_death(philos, i))
 				return (NULL);
+			pthread_mutex_lock(philos[0].philo_mutex);
 		}
 		pthread_mutex_unlock(philos[0].philo_mutex);
 		if (all_meals_reached(philos))
