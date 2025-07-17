@@ -6,11 +6,11 @@
 /*   By: nyousfi <nyousfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:26:26 by nyousfi           #+#    #+#             */
-/*   Updated: 2025/07/16 15:49:39 by nyousfi          ###   ########.fr       */
+/*   Updated: 2025/07/17 09:36:52 by nyousfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "philo.h"	
+#include "philo.h"
 
 long long	ft_atoll(const char *str)
 {

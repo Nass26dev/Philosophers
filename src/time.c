@@ -6,11 +6,11 @@
 /*   By: nyousfi <nyousfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:56:43 by nyousfi           #+#    #+#             */
-/*   Updated: 2025/07/03 17:53:15 by nyousfi          ###   ########.fr       */
+/*   Updated: 2025/07/17 09:37:32 by nyousfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "philo.h"
+#include "philo.h"
 
 long	get_current_time_ms(void)
 {
@@ -22,8 +22,8 @@ long	get_current_time_ms(void)
 
 void	assign_times(t_data *data)
 {
-	int i;
-	long st_time;
+	int		i;
+	long	st_time;
 
 	st_time = get_current_time_ms();
 	i = 0;

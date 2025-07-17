@@ -6,11 +6,11 @@
 /*   By: nyousfi <nyousfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 18:05:51 by nyousfi           #+#    #+#             */
-/*   Updated: 2025/07/17 09:31:45 by nyousfi          ###   ########.fr       */
+/*   Updated: 2025/07/17 09:37:06 by nyousfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "philo.h"
+#include "philo.h"
 
 bool	all_meals_reached(t_philo *philos)
 {
@@ -41,7 +41,7 @@ bool	all_meals_reached(t_philo *philos)
 	return (true);
 }
 
-void stop_routine(t_philo *philos)
+void	stop_routine(t_philo *philos)
 {
 	int	i;
 

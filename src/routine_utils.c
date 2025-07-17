@@ -6,11 +6,11 @@
 /*   By: nyousfi <nyousfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 17:35:10 by nyousfi           #+#    #+#             */
-/*   Updated: 2025/07/17 09:32:28 by nyousfi          ###   ########.fr       */
+/*   Updated: 2025/07/17 09:37:23 by nyousfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "philo.h"
+#include "philo.h"
 
 void	print_step(t_philo *philo, char *color, char *step)
 {
@@ -22,7 +22,8 @@ void	print_step(t_philo *philo, char *color, char *step)
 	}
 	pthread_mutex_unlock(philo->dead_mutex);
 	pthread_mutex_lock(philo->print_mutex);
-	printf("%s%ld%s %d %s%s%s\n", PURPLE, get_current_time_ms() - philo->start_time, RESET, philo->id, color, step, RESET);
+	printf("%s%ld%s %d %s%s%s\n", PURPLE, get_current_time_ms()
+		- philo->start_time, RESET, philo->id, color, step, RESET);
 	pthread_mutex_unlock(philo->print_mutex);
 }
 

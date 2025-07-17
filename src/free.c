@@ -6,15 +6,15 @@
 /*   By: nyousfi <nyousfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:37:00 by nyousfi           #+#    #+#             */
-/*   Updated: 2025/07/03 16:53:09 by nyousfi          ###   ########.fr       */
+/*   Updated: 2025/07/17 09:36:59 by nyousfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "philo.h"
+#include "philo.h"
 
-void free_ressources(t_data *data)
+void	free_ressources(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < data->nb_philos)

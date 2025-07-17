@@ -6,11 +6,11 @@
 /*   By: nyousfi <nyousfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 17:27:38 by nyousfi           #+#    #+#             */
-/*   Updated: 2025/07/17 09:32:08 by nyousfi          ###   ########.fr       */
+/*   Updated: 2025/07/17 09:37:16 by nyousfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "philo.h"
+#include "philo.h"
 
 bool	is_one_philo(t_philo *philo)
 {
@@ -24,7 +24,7 @@ bool	is_one_philo(t_philo *philo)
 	return (false);
 }
 
-bool check_routine_stop(t_philo *philo)
+bool	check_routine_stop(t_philo *philo)
 {
 	pthread_mutex_lock(philo->dead_mutex);
 	if (*(philo->is_dead))
@@ -36,7 +36,7 @@ bool check_routine_stop(t_philo *philo)
 	return (false);
 }
 
-void try_to_take_left_fork(t_philo *philo)
+void	try_to_take_left_fork(t_philo *philo)
 {
 	while (1)
 	{
@@ -53,7 +53,7 @@ void try_to_take_left_fork(t_philo *philo)
 	}
 }
 
-void try_to_take_right_fork(t_philo *philo)
+void	try_to_take_right_fork(t_philo *philo)
 {
 	while (1)
 	{
@@ -70,7 +70,7 @@ void try_to_take_right_fork(t_philo *philo)
 	}
 }
 
-void drop_forks(t_philo *philo)
+void	drop_forks(t_philo *philo)
 {
 	pthread_mutex_lock(philo->left_fork);
 	*(philo->l_fork) = false;

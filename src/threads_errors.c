@@ -6,15 +6,15 @@
 /*   By: nyousfi <nyousfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 17:02:11 by nyousfi           #+#    #+#             */
-/*   Updated: 2025/07/03 17:02:34 by nyousfi          ###   ########.fr       */
+/*   Updated: 2025/07/17 09:37:30 by nyousfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "philo.h"
+#include "philo.h"
 
-bool error_monitor_case(t_data *data)
+bool	error_monitor_case(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	printf("Error during monitor thread creation\n");
@@ -27,9 +27,9 @@ bool error_monitor_case(t_data *data)
 	return (true);
 }
 
-bool error_philo_case(t_data *data, int nb_philos)
+bool	error_philo_case(t_data *data, int nb_philos)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	printf("Error during philo thread creation\n");

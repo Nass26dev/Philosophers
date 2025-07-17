@@ -6,15 +6,15 @@
 /*   By: nyousfi <nyousfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:29:43 by nyousfi           #+#    #+#             */
-/*   Updated: 2025/07/03 17:40:49 by nyousfi          ###   ########.fr       */
+/*   Updated: 2025/07/17 09:37:13 by nyousfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "philo.h"
+#include "philo.h"
 
-bool create_mutexes(t_data *data)
+bool	create_mutexes(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < data->nb_philos)
