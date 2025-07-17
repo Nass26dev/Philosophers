@@ -6,7 +6,7 @@
 /*   By: nyousfi <nyousfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:56:02 by nyousfi           #+#    #+#             */
-/*   Updated: 2025/07/04 16:15:26 by nyousfi          ###   ########.fr       */
+/*   Updated: 2025/07/16 18:16:03 by nyousfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void *monitor_routine(void *arg)
 			stop_routine(philos);
 			return (NULL);
 		}
-		usleep(1000);
+		usleep(500);
 	}
 	return (NULL);
 }
@@ -64,10 +64,10 @@ void philo_routine(t_philo *philo)
 		try_to_take_right_fork(philo);
 		print_step(philo, GREEN,"is eating");
 		pthread_mutex_lock(&philo->time_mutex);
-		philo->last_meal = get_current_time_ms();
-		pthread_mutex_unlock(&philo->time_mutex);
 		pthread_mutex_lock(&philo->meal_mutex);
+		philo->last_meal = get_current_time_ms();
 		philo->meal_count++;
+		pthread_mutex_unlock(&philo->time_mutex);
 		pthread_mutex_unlock(&philo->meal_mutex);
 		usleep_loop(philo->times.eat);
 		drop_forks(philo);
@@ -82,7 +82,7 @@ void *launch_philo_routine(void *arg)
 
 	philo = (t_philo *)arg;
 	if (philo->id % 2 == 0)
-		usleep(1000);
+		usleep(500);
 	philo_routine(philo);
 	return (NULL);
 }
@@ -93,8 +93,6 @@ bool launch_routines(t_data *data)
 	int i;
 
 	pthread_create(&threads.monitor, NULL, monitor_routine, data->philo);
-	// if (pthread_create(&threads.monitor, NULL, monitor_routine, data->philo) != 0)
-	// 	return (error_monitor_case(data));
 	i = 0;
 	while (i < data->nb_philos)
 	{

@@ -6,7 +6,7 @@
 /*   By: nyousfi <nyousfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:26:26 by nyousfi           #+#    #+#             */
-/*   Updated: 2025/07/03 16:27:09 by nyousfi          ###   ########.fr       */
+/*   Updated: 2025/07/16 15:49:39 by nyousfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ long long	ft_atoll(const char *str)
 		str++;
 	}
 	if (*str < '0' || *str > '9')
-		return (LLONG_MAX);
+		return (-1);
 	while (*str >= '0' && *str <= '9')
 	{
 		nb = (nb * 10) + (*str - '0');
 		str++;
 	}
-	if (*str < '0' && *str > '9' && *str != 0)
-		return (LLONG_MAX);
+	if ((*str < '0' || *str > '9') && *str != 0)
+		return (-1);
 	return (nb * sign);
 }
 
