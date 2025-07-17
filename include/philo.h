@@ -6,7 +6,7 @@
 /*   By: nyousfi <nyousfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:14:52 by nyousfi           #+#    #+#             */
-/*   Updated: 2025/07/04 16:07:29 by nyousfi          ###   ########.fr       */
+/*   Updated: 2025/07/17 09:13:35 by nyousfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,13 @@ typedef struct s_philo
 	bool 			is_dead;
 	bool 			*l_fork;
 	bool 			*r_fork;
-	T_MUTEX	        left_fork;
-	T_MUTEX	        right_fork;
-	T_MUTEX	        print_mutex;
-	T_MUTEX	        dead_mutex;
-	T_MUTEX	        philo_mutex;
-	T_MUTEX	        meal_mutex;
-	T_MUTEX	        time_mutex;
+	T_MUTEX	        *left_fork;
+	T_MUTEX	        *right_fork;
+	T_MUTEX	        *print_mutex;
+	T_MUTEX	        *dead_mutex;
+	T_MUTEX	        *philo_mutex;
+	T_MUTEX	        *meal_mutex;
+	T_MUTEX	        *time_mutex;
 }			t_philo;
 
 typedef struct s_threads

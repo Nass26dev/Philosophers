@@ -6,7 +6,7 @@
 /*   By: nyousfi <nyousfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:56:02 by nyousfi           #+#    #+#             */
-/*   Updated: 2025/07/16 18:16:03 by nyousfi          ###   ########.fr       */
+/*   Updated: 2025/07/17 09:16:48 by nyousfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,28 +21,28 @@ void *monitor_routine(void *arg)
 	while (1)
 	{
 		i = -1;
-		pthread_mutex_lock(&philos[0].philo_mutex);
+		pthread_mutex_lock(philos[0].philo_mutex);
 		while (++i < philos[0].nb_philos)
 		{
-			pthread_mutex_unlock(&philos->philo_mutex);
-			pthread_mutex_lock(&philos->meal_mutex);
-			pthread_mutex_lock(&philos[i].time_mutex);
+			pthread_mutex_unlock(philos->philo_mutex);
+			pthread_mutex_lock(philos->meal_mutex);
+			pthread_mutex_lock(philos[i].time_mutex);
 			if ((get_current_time_ms() - philos[i].last_meal) >= philos[i].times.die)
 			{
-				pthread_mutex_lock(&philos->print_mutex);
+				pthread_mutex_lock(philos->print_mutex);
 				stop_routine(philos);
-				pthread_mutex_unlock(&philos[i].time_mutex);
-				pthread_mutex_unlock(&philos->meal_mutex);
+				pthread_mutex_unlock(philos[i].time_mutex);
+				pthread_mutex_unlock(philos->meal_mutex);
 				printf("%s%ld%s %d %s%s%s\n", PURPLE, get_current_time_ms()
 					- philos[i].start_time, RESET, philos[i].id, RED, "is dead", RESET);
-				pthread_mutex_unlock(&philos->print_mutex);
+				pthread_mutex_unlock(philos->print_mutex);
 				return (NULL);
 			}
-			pthread_mutex_unlock(&philos[i].time_mutex);
-			pthread_mutex_unlock(&philos->meal_mutex);
-			pthread_mutex_lock(&philos->philo_mutex);
+			pthread_mutex_unlock(philos[i].time_mutex);
+			pthread_mutex_unlock(philos->meal_mutex);
+			pthread_mutex_lock(philos->philo_mutex);
 		}
-		pthread_mutex_unlock(&philos[0].philo_mutex);
+		pthread_mutex_unlock(philos[0].philo_mutex);
 		if (all_meals_reached(philos))
 		{
 			stop_routine(philos);
@@ -63,12 +63,12 @@ void philo_routine(t_philo *philo)
 			return ;
 		try_to_take_right_fork(philo);
 		print_step(philo, GREEN,"is eating");
-		pthread_mutex_lock(&philo->time_mutex);
-		pthread_mutex_lock(&philo->meal_mutex);
+		pthread_mutex_lock(philo->time_mutex);
+		pthread_mutex_lock(philo->meal_mutex);
 		philo->last_meal = get_current_time_ms();
 		philo->meal_count++;
-		pthread_mutex_unlock(&philo->time_mutex);
-		pthread_mutex_unlock(&philo->meal_mutex);
+		pthread_mutex_unlock(philo->time_mutex);
+		pthread_mutex_unlock(philo->meal_mutex);
 		usleep_loop(philo->times.eat);
 		drop_forks(philo);
 		print_step(philo, BLUE, "is sleeping");
