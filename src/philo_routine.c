@@ -6,7 +6,7 @@
 /*   By: nyousfi <nyousfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 17:27:38 by nyousfi           #+#    #+#             */
-/*   Updated: 2025/07/17 09:14:57 by nyousfi          ###   ########.fr       */
+/*   Updated: 2025/07/17 09:32:08 by nyousfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ bool	is_one_philo(t_philo *philo)
 bool check_routine_stop(t_philo *philo)
 {
 	pthread_mutex_lock(philo->dead_mutex);
-	if (philo->is_dead)
+	if (*(philo->is_dead))
 	{
 		pthread_mutex_unlock(philo->dead_mutex);
 		return (true);

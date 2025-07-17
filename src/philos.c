@@ -6,7 +6,7 @@
 /*   By: nyousfi <nyousfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:39:28 by nyousfi           #+#    #+#             */
-/*   Updated: 2025/07/17 09:13:54 by nyousfi          ###   ########.fr       */
+/*   Updated: 2025/07/17 09:32:45 by nyousfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@ void create_philos(t_data *data, int argc, char **argv)
 	int i;
 
 	i = 0;
+	bool is_dead;
+
+	is_dead = false;
 	while (i < data->nb_philos)
 	{
 		data->philo[i].id = i + 1;
@@ -30,7 +33,7 @@ void create_philos(t_data *data, int argc, char **argv)
 		data->philo[i].last_meal = 0;
 		data->philo[i].start_time = 0;
 		data->philo[i].meal_count = 0;
-		data->philo[i].is_dead = false;
+		data->philo[i].is_dead = &is_dead;
 		data->philo[i].nb_philos = data->nb_philos;
 		data->philo[i].left_fork = &data->forks[i];
 		data->philo[i].right_fork = &data->forks[(i + 1) % data->nb_philos];

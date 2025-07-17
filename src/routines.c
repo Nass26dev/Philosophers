@@ -6,7 +6,7 @@
 /*   By: nyousfi <nyousfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:56:02 by nyousfi           #+#    #+#             */
-/*   Updated: 2025/07/17 09:16:48 by nyousfi          ###   ########.fr       */
+/*   Updated: 2025/07/17 09:24:15 by nyousfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ void *monitor_routine(void *arg)
 				pthread_mutex_unlock(philos->print_mutex);
 				return (NULL);
 			}
-			pthread_mutex_unlock(philos[i].time_mutex);
 			pthread_mutex_unlock(philos->meal_mutex);
+			pthread_mutex_unlock(philos[i].time_mutex);
 			pthread_mutex_lock(philos->philo_mutex);
 		}
 		pthread_mutex_unlock(philos[0].philo_mutex);
@@ -63,12 +63,12 @@ void philo_routine(t_philo *philo)
 			return ;
 		try_to_take_right_fork(philo);
 		print_step(philo, GREEN,"is eating");
-		pthread_mutex_lock(philo->time_mutex);
 		pthread_mutex_lock(philo->meal_mutex);
+		pthread_mutex_lock(philo->time_mutex);
 		philo->last_meal = get_current_time_ms();
 		philo->meal_count++;
-		pthread_mutex_unlock(philo->time_mutex);
 		pthread_mutex_unlock(philo->meal_mutex);
+		pthread_mutex_unlock(philo->time_mutex);
 		usleep_loop(philo->times.eat);
 		drop_forks(philo);
 		print_step(philo, BLUE, "is sleeping");

@@ -6,7 +6,7 @@
 /*   By: nyousfi <nyousfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:14:52 by nyousfi           #+#    #+#             */
-/*   Updated: 2025/07/17 09:13:35 by nyousfi          ###   ########.fr       */
+/*   Updated: 2025/07/17 09:30:23 by nyousfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef struct s_philo
 	long			meal_count;
 	long			start_time;
 	long 			nb_philos;
-	bool 			is_dead;
+	bool 			*is_dead;
 	bool 			*l_fork;
 	bool 			*r_fork;
 	T_MUTEX	        *left_fork;

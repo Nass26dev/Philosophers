@@ -6,7 +6,7 @@
 /*   By: nyousfi <nyousfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 17:35:10 by nyousfi           #+#    #+#             */
-/*   Updated: 2025/07/17 09:15:14 by nyousfi          ###   ########.fr       */
+/*   Updated: 2025/07/17 09:32:28 by nyousfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	print_step(t_philo *philo, char *color, char *step)
 {
 	pthread_mutex_lock(philo->dead_mutex);
-	if (philo->is_dead)
+	if (*(philo->is_dead))
 	{
 		pthread_mutex_unlock(philo->dead_mutex);
 		return ;
