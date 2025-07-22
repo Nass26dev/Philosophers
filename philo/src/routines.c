@@ -6,7 +6,7 @@
 /*   By: nyousfi <nyousfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:56:02 by nyousfi           #+#    #+#             */
-/*   Updated: 2025/07/22 14:28:22 by nyousfi          ###   ########.fr       */
+/*   Updated: 2025/07/22 14:32:32 by nyousfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ bool	launch_routines(t_data *data)
 	while (i < data->nb_philos)
 	{
 		if (pthread_create(&threads.philos[i], NULL, launch_philo_routine,
-			&data->philo[i]))
+				&data->philo[i]))
 			return (error_philo_case(data, data->nb_philos));
 		i++;
 	}
