@@ -6,7 +6,7 @@
 /*   By: nyousfi <nyousfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 17:27:38 by nyousfi           #+#    #+#             */
-/*   Updated: 2025/07/17 09:37:16 by nyousfi          ###   ########.fr       */
+/*   Updated: 2025/07/22 10:10:08 by nyousfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ bool	is_one_philo(t_philo *philo)
 	if (philo->nb_philos == 1)
 	{
 		pthread_mutex_unlock(philo->philo_mutex);
+		print_step(philo, YELLOW, "has taken a fork");
 		return (true);
 	}
 	pthread_mutex_unlock(philo->philo_mutex);
@@ -45,8 +46,22 @@ void	try_to_take_left_fork(t_philo *philo)
 		{
 			*(philo->l_fork) = true;
 			pthread_mutex_unlock(philo->left_fork);
-			print_step(philo, YELLOW, "has taken a fork");
-			return ;
+			pthread_mutex_lock(philo->right_fork);
+			if (*(philo->r_fork))
+			{
+				pthread_mutex_lock(philo->left_fork);
+				*(philo->l_fork) = false;
+				pthread_mutex_unlock(philo->left_fork);
+				pthread_mutex_unlock(philo->right_fork);
+				continue ;
+			}
+			else
+			{
+				*(philo->r_fork) = true;
+				pthread_mutex_unlock(philo->right_fork);
+				print_for_forks(philo);
+				return ;
+			}
 		}
 		pthread_mutex_unlock(philo->left_fork);
 		usleep(200);
@@ -62,20 +77,46 @@ void	try_to_take_right_fork(t_philo *philo)
 		{
 			*(philo->r_fork) = true;
 			pthread_mutex_unlock(philo->right_fork);
-			print_step(philo, ORANGE, "has taken a fork");
-			return ;
+			pthread_mutex_lock(philo->left_fork);
+			if (*(philo->l_fork))
+			{
+				pthread_mutex_lock(philo->right_fork);
+				*(philo->r_fork) = false;
+				pthread_mutex_unlock(philo->right_fork);
+				pthread_mutex_unlock(philo->left_fork);
+				continue ;
+			}
+			else
+			{
+				*(philo->l_fork) = true;
+				pthread_mutex_unlock(philo->left_fork);
+				print_for_forks(philo);
+				return ;
+			}
 		}
 		pthread_mutex_unlock(philo->right_fork);
-		usleep(200);
+		usleep(500);
 	}
 }
 
 void	drop_forks(t_philo *philo)
 {
-	pthread_mutex_lock(philo->left_fork);
-	*(philo->l_fork) = false;
-	pthread_mutex_unlock(philo->left_fork);
-	pthread_mutex_lock(philo->right_fork);
-	*(philo->r_fork) = false;
-	pthread_mutex_unlock(philo->right_fork);
+	if (philo->id % 2 != 0)
+	{
+		pthread_mutex_lock(philo->left_fork);
+		*(philo->l_fork) = false;
+		pthread_mutex_unlock(philo->left_fork);
+		pthread_mutex_lock(philo->right_fork);
+		*(philo->r_fork) = false;
+		pthread_mutex_unlock(philo->right_fork);
+	}
+	else
+	{
+		pthread_mutex_lock(philo->right_fork);
+		*(philo->r_fork) = false;
+		pthread_mutex_unlock(philo->right_fork);
+		pthread_mutex_lock(philo->left_fork);
+		*(philo->l_fork) = false;
+		pthread_mutex_unlock(philo->left_fork);
+	}
 }

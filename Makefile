@@ -6,7 +6,7 @@
 #    By: nyousfi <nyousfi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/03 16:49:57 by nyousfi           #+#    #+#              #
-#    Updated: 2025/07/03 18:49:17 by nyousfi          ###   ########.fr        #
+#    Updated: 2025/07/22 09:26:16 by nyousfi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,15 @@ NAME = philo
 ARGS =
 CC = cc
 CFLAGS = -Wall -Werror -Wextra -MMD -MP
+CFLAGS_NO_COLORS = -Wall -Werror -Wextra -MMD -MP \
+                   -DRESET='""' \
+                   -DRED='""' \
+                   -DGREEN='""' \
+                   -DYELLOW='""' \
+                   -DORANGE='""' \
+                   -DCYAN='""' \
+                   -DBLUE='""' \
+                   -DPURPLE='""'
 SRCS = src/main.c \
 	   src/args.c \
 	   src/error.c \
@@ -66,6 +75,12 @@ $(OBJDIR)/%.o: src/%.c $(HEADER)
 
 -include $(DEPS)
 
+wcolors: CFLAGS = $(CFLAGS_NO_COLORS)
+wcolors: clean $(OBJS)
+	@echo "$(MESSAGE_COLOR_YELLOW)Linking without colors... 🎨$(MESSAGE_RESET)"
+	@$(CC) $(OBJS) -o $(NAME)
+	@$(eval COMPILED := 1)
+	@echo "$(MESSAGE_COLOR_GREEN)Compilation without colors done! ✅$(MESSAGE_RESET)"	
 valgrind:
 	@valgrind --leak-check=full \
 			  --show-leak-kinds=all \
