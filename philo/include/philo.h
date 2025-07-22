@@ -6,7 +6,7 @@
 /*   By: nyousfi <nyousfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:14:52 by nyousfi           #+#    #+#             */
-/*   Updated: 2025/07/22 12:46:43 by nyousfi          ###   ########.fr       */
+/*   Updated: 2025/07/22 14:13:53 by nyousfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,36 +21,36 @@
 # include <sys/time.h>
 # include <unistd.h>
 
-#ifndef RESET
-# define RESET "\033[0m"
-#endif
-#ifndef RED
-# define RED "\033[31m"
-#endif
-#ifndef GREEN
-# define GREEN "\033[32m"
-#endif
-#ifndef YELLOW
-# define YELLOW "\033[0;33m"
-#endif
-#ifndef ORANGE
-# define ORANGE "\033[38;5;208m"
-#endif
-#ifndef CYAN
-# define CYAN "\033[0;36m"
-#endif
-#ifndef BLUE
-# define BLUE "\033[0;34m"
-#endif
-#ifndef PURPLE
-# define PURPLE "\033[0;35m"
-#endif 
-#ifndef T_MUTEX
-# define T_MUTEX pthread_mutex_t
-#endif
-#ifndef MAX_PHILOS
-# define MAX_PHILOS 200
-#endif
+# ifndef RESET
+#  define RESET "\033[0m"
+# endif
+# ifndef RED
+#  define RED "\033[31m"
+# endif
+# ifndef GREEN
+#  define GREEN "\033[32m"
+# endif
+# ifndef YELLOW
+#  define YELLOW "\033[0;33m"
+# endif
+# ifndef ORANGE
+#  define ORANGE "\033[38;5;208m"
+# endif
+# ifndef CYAN
+#  define CYAN "\033[0;36m"
+# endif
+# ifndef BLUE
+#  define BLUE "\033[0;34m"
+# endif
+# ifndef PURPLE
+#  define PURPLE "\033[0;35m"
+# endif
+# ifndef T_MUTEX
+#  define T_MUTEX pthread_mutex_t
+# endif
+# ifndef MAX_PHILOS
+#  define MAX_PHILOS 200
+# endif
 
 typedef struct s_times
 {
@@ -129,8 +129,9 @@ bool			check_routine_stop(t_philo *philo);
 bool			is_one_philo(t_philo *philo);
 // routine_utils.c
 void			print_step(t_philo *philo, char *color, char *step);
-void	usleep_loop(long time_to_sleep, t_philo *philo);
-void print_for_forks(t_philo *philo);
+void			usleep_loop(long time_to_sleep, t_philo *philo);
+void			print_for_forks(t_philo *philo);
+void			takes_forks(t_philo *philo);
 // monitor_routine.c
 bool			all_meals_reached(t_philo *philos);
 void			stop_routine(t_philo *philos);

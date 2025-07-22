@@ -6,7 +6,7 @@
 /*   By: nyousfi <nyousfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:56:02 by nyousfi           #+#    #+#             */
-/*   Updated: 2025/07/22 12:46:58 by nyousfi          ###   ########.fr       */
+/*   Updated: 2025/07/22 14:12:44 by nyousfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,16 +59,9 @@ void	philo_routine(t_philo *philo)
 	{
 		if (is_one_philo(philo))
 			return ;
-		if (philo->id % 2 == 0)
-			try_to_take_left_fork(philo);
-		else
-			try_to_take_right_fork(philo);
-		print_step(philo, YELLOW, "has taken a fork");
-		if (philo->id % 2 == 0)
-			try_to_take_right_fork(philo);
-		else
-			try_to_take_left_fork(philo);
-		print_step(philo, ORANGE, "has taken a fork");
+		if (philo->nb_philos % 2 == 1)
+			usleep_loop(philo->times.eat / 2, philo);
+		takes_forks(philo);
 		pthread_mutex_lock(philo->time_mutex);
 		philo->last_meal = get_current_time_ms();
 		pthread_mutex_unlock(philo->time_mutex);
@@ -91,7 +84,7 @@ void	*launch_philo_routine(void *arg)
 	philo = (t_philo *)arg;
 	print_step(philo, CYAN, "is thinking");
 	if (philo->id % 2 == 0)
-		usleep_loop(philo->times.die / 2, philo);
+		usleep_loop(philo->times.eat / 2, philo);
 	philo_routine(philo);
 	return (NULL);
 }
