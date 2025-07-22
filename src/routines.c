@@ -6,7 +6,7 @@
 /*   By: nyousfi <nyousfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:56:02 by nyousfi           #+#    #+#             */
-/*   Updated: 2025/07/22 10:14:43 by nyousfi          ###   ########.fr       */
+/*   Updated: 2025/07/22 11:55:50 by nyousfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ bool	check_death(t_philo *philos, int i)
 	pthread_mutex_lock(philos[i].time_mutex);
 	if ((get_current_time_ms() - philos[i].last_meal) >= philos[i].times.die)
 	{
+		pthread_mutex_unlock(philos[i].time_mutex);
 		pthread_mutex_lock(philos->print_mutex);
 		stop_routine(philos);
-		pthread_mutex_unlock(philos[i].time_mutex);
 		printf("%s%ld%s %d %s%s%s\n", PURPLE, get_current_time_ms()
 			- philos[i].start_time, RESET, philos[i].id, RED, "died", RESET);
 		pthread_mutex_unlock(philos->print_mutex);
@@ -63,10 +63,16 @@ void	philo_routine(t_philo *philo)
 			try_to_take_left_fork(philo);
 		else
 			try_to_take_right_fork(philo);
-		print_step(philo, GREEN, "is eating");
+		print_step(philo, YELLOW, "has taken a fork");
+		if (philo->id % 2 == 0)
+			try_to_take_right_fork(philo);
+		else
+			try_to_take_left_fork(philo);
+		print_step(philo, ORANGE, "has taken a fork");
 		pthread_mutex_lock(philo->time_mutex);
 		philo->last_meal = get_current_time_ms();
 		pthread_mutex_unlock(philo->time_mutex);
+		print_step(philo, GREEN, "is eating");
 		pthread_mutex_lock(philo->meal_mutex);
 		philo->meal_count++;
 		pthread_mutex_unlock(philo->meal_mutex);
@@ -83,7 +89,7 @@ void	*launch_philo_routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	print_step(philo, CYAN, "is thinking");\
+	print_step(philo, CYAN, "is thinking");
 	if (philo->id % 2 == 0)
 		usleep_loop(philo->times.die / 2, philo);
 	philo_routine(philo);
