@@ -6,7 +6,7 @@
 /*   By: nyousfi <nyousfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:14:52 by nyousfi           #+#    #+#             */
-/*   Updated: 2025/07/22 10:05:27 by nyousfi          ###   ########.fr       */
+/*   Updated: 2025/07/22 12:46:43 by nyousfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@
 # define T_MUTEX pthread_mutex_t
 #endif
 #ifndef MAX_PHILOS
-# define MAX_PHILOS 250
+# define MAX_PHILOS 200
 #endif
 
 typedef struct s_times
@@ -82,7 +82,7 @@ typedef struct s_philo
 
 typedef struct s_threads
 {
-	pthread_t	philos[MAX_PHILOS];
+	pthread_t	philos[MAX_PHILOS + 2];
 	pthread_t	monitor;
 }				t_threads;
 

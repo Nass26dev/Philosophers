@@ -6,7 +6,7 @@
 /*   By: nyousfi <nyousfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:26:26 by nyousfi           #+#    #+#             */
-/*   Updated: 2025/07/22 08:55:33 by nyousfi          ###   ########.fr       */
+/*   Updated: 2025/07/22 12:47:20 by nyousfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ bool	check_args(int argc, char **argv, t_data *data)
 {
 	if (argc != 5 && argc != 6)
 		return (error_args_case(1));
-	if (ft_atoll(argv[1]) > 200 || ft_atoll(argv[1]) <= 0)
+	if (ft_atoll(argv[1]) > MAX_PHILOS || ft_atoll(argv[1]) <= 0)
 		return (error_args_case(2));
 	data->nb_philos = ft_atoll(argv[1]);
 	if (ft_atoll(argv[2]) > LONG_MAX || ft_atoll(argv[2]) <= 0)
