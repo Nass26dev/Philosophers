@@ -6,7 +6,7 @@
 /*   By: nyousfi <nyousfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:14:52 by nyousfi           #+#    #+#             */
-/*   Updated: 2025/07/22 14:13:53 by nyousfi          ###   ########.fr       */
+/*   Updated: 2025/07/22 14:26:32 by nyousfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <stdlib.h>
 # include <sys/time.h>
 # include <unistd.h>
+# include <string.h>
 
 # ifndef RESET
 #  define RESET "\033[0m"
@@ -96,6 +97,7 @@ typedef struct s_data
 	T_MUTEX		time_mutex;
 	T_MUTEX		philo_mutex;
 	bool		bool_forks[MAX_PHILOS];
+	bool 		is_dead;
 	int			nb_philos;
 }				t_data;
 
@@ -135,4 +137,7 @@ void			takes_forks(t_philo *philo);
 // monitor_routine.c
 bool			all_meals_reached(t_philo *philos);
 void			stop_routine(t_philo *philos);
+//threads_errors.c
+bool	error_monitor_case(t_data *data);
+bool	error_philo_case(t_data *data, int nb_philos);
 #endif

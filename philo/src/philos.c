@@ -6,7 +6,7 @@
 /*   By: nyousfi <nyousfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:39:28 by nyousfi           #+#    #+#             */
-/*   Updated: 2025/07/17 09:42:58 by nyousfi          ###   ########.fr       */
+/*   Updated: 2025/07/22 14:29:33 by nyousfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,9 @@ void	init_mutex(t_philo *philo, t_data *data, int i)
 void	create_philos(t_data *data, int argc, char **argv)
 {
 	int		i;
-	bool	is_dead;
 
 	i = 0;
-	is_dead = false;
+	data->is_dead = false;
 	while (i < data->nb_philos)
 	{
 		data->philo[i].id = i + 1;
@@ -48,7 +47,7 @@ void	create_philos(t_data *data, int argc, char **argv)
 		data->philo[i].last_meal = 0;
 		data->philo[i].start_time = 0;
 		data->philo[i].meal_count = 0;
-		data->philo[i].is_dead = &is_dead;
+		data->philo[i].is_dead = &data->is_dead;
 		data->philo[i].nb_philos = data->nb_philos;
 		init_mutex(&data->philo[i], data, i);
 		data->philo[i].l_fork = &data->bool_forks[i];

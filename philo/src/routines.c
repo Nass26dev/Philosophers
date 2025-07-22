@@ -6,7 +6,7 @@
 /*   By: nyousfi <nyousfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:56:02 by nyousfi           #+#    #+#             */
-/*   Updated: 2025/07/22 14:12:44 by nyousfi          ###   ########.fr       */
+/*   Updated: 2025/07/22 14:28:22 by nyousfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,15 @@ bool	launch_routines(t_data *data)
 	t_threads	threads;
 	int			i;
 
-	pthread_create(&threads.monitor, NULL, monitor_routine, data->philo);
+	memset(&threads, 0, sizeof(threads));
+	if (pthread_create(&threads.monitor, NULL, monitor_routine, data->philo))
+		return (error_monitor_case(data));
 	i = 0;
 	while (i < data->nb_philos)
 	{
-		pthread_create(&threads.philos[i], NULL, launch_philo_routine,
-			&data->philo[i]);
+		if (pthread_create(&threads.philos[i], NULL, launch_philo_routine,
+			&data->philo[i]))
+			return (error_philo_case(data, data->nb_philos));
 		i++;
 	}
 	pthread_join(threads.monitor, NULL);
